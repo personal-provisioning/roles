@@ -1,6 +1,6 @@
 ---
 - name: Install watchman (OS X)
-  homebrew_cask: name=watchman state=present
+  homebrew: name=watchman state=present
   when: ansible_os_family == 'Darwin'
 
 - name: Install watchman (Arch)
