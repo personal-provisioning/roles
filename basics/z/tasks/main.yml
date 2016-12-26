@@ -1,0 +1,9 @@
+---
+- name: Install z
+  homebrew: name=z state=present
+
+- name: Set z Path in Fish shell config
+  lineinfile: dest=~/.config/fish/config.fish line="set -g Z_SCRIPT_PATH (brew --prefix)/etc/profile.d/z.sh" state=present
+
+- name: Add z plugin for Fish shell
+  lineinfile: dest=~/.config/omf/bundle line="package z" state=present
