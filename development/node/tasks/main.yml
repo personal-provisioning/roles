@@ -1,0 +1,11 @@
+---
+
+- name: Install node
+  homebrew: name=node state=present
+
+- name: Write npmrc
+  template: src=npmrc.j2 dest=~/.npmrc
+
+# TODO: make this dependent on existence of config dir
+- name: Add npm to the path of the fish shell
+  lineinfile: dest=~/.config/fish/config.fish line="set -x PATH $PATH ~/.npm/bin" state=present
