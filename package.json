@@ -1,0 +1,24 @@
+{
+  "name": "local-provisioning",
+  "version": "1.0.0",
+  "description": "Basic starter kit to create your own provisioning",
+  "main": "index.js",
+  "scripts": {
+    "generateRole": "node ./generateNewRole.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/costacruise/local-provisioning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/costacruise/local-provisioning/issues"
+  },
+  "homepage": "https://github.com/costacruise/local-provisioning#readme",
+  "devDependencies": {
+    "inquirer": "^3.0.1",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1"
+  }
+}
