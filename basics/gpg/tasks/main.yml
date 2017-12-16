@@ -1,0 +1,12 @@
+---
+- block:
+
+    - name: Install gpg
+      homebrew: name=gpg state=present
+      when: ansible_os_family == 'Darwin'
+
+    - name: Install gpg Tools
+      homebrew_cask: name=gpgtools state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: gpg
