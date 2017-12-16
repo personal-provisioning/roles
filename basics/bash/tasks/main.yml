@@ -1,0 +1,37 @@
+---
+- block:
+  
+    - name: Install Bash
+      homebrew: name=bash state=present
+
+    - name: Create bashrc.d config dir
+      file:
+        path: ~/.bashrc.d
+        state: directory
+        mode: 0700
+
+    - name: Create bashrc.d/aliases config dir
+      file:
+        path: ~/.bashrc.d/aliases
+        state: directory
+        mode: 0700
+
+    - name: Source all files from new Config and Alias dirs
+      blockinfile:
+        dest: "~/.bashrc"
+        block: |
+          for config in $HOME/.bashrc.d/*.bash ; do
+            [ -e $config ] && source $config
+          done
+
+          for config in $HOME/.bashrc.d/aliases/*.bash ; do
+            [ -e $config ] && source $config
+          done
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - bashrc.d"
+        insertbefore: EOF
+        create: yes
+
+    - name: Install Bash Completion
+      homebrew: name=bash-completion state=present
+
+  tags: bash
