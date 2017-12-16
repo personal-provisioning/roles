@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install Iterm2
+      homebrew_cask: name=iterm2 state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: iterm
