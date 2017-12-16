@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install vim
+      homebrew_cask: name=vim state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: vim
