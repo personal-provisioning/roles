@@ -1,0 +1,8 @@
+---
+- block:      
+    - name: Install sketch
+      homebrew_cask: name=sketch state=present
+      when: ansible_os_family == 'Darwin'
+  tags: sketch
+
+
