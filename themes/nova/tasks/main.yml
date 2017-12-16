@@ -1,0 +1,10 @@
+---
+- block:
+
+    - name: Set color fixes in shell
+      copy:
+        src: nova.fish
+        dest: ~/.config/fish/conf.d/nova.fish
+
+  tags: theme-nova
+  when: "'{{ shell }}' == 'fish'"
