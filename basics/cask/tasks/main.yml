@@ -1,9 +1,13 @@
 ---
-- name: Tab Homebrew Cask
-  homebrew_tap: tap=caskroom/cask state=present
+- block:
 
-- name: Tab Homebrew Cask Versions
-  homebrew_tap: tap=caskroom/versions state=present
+    - name: Tab Homebrew Cask
+      homebrew_tap: tap=caskroom/cask state=present
 
-- name: Install Homebrew Cask
-  homebrew: name=cask state=present
+    - name: Tab Homebrew Cask Versions
+      homebrew_tap: tap=caskroom/versions state=present
+
+    - name: Install Homebrew Cask
+      homebrew: name=cask state=present
+
+  tags: cask
