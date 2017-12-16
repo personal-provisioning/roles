@@ -1,0 +1,12 @@
+---
+- block:
+
+    - name: Searching in AppStore for Xcode
+      shell: "mas search Xcode | head -1 | awk '{print $1}'"
+      register: xcode_id
+
+    - name: Install Xcode
+      command: mas install "{{ xcode_id.stdout }}"
+
+  tags: Xcode
+  when: ansible_os_family == 'Darwin'

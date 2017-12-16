@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install postman
+      homebrew_cask: name=postman state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: postman
