@@ -1,0 +1,26 @@
+---
+- block:
+
+    - name: Install mas
+      homebrew: name=mas state=present
+
+    - name: Get MAS account status
+      shell: 'mas account'
+      register: mas_account_result
+      failed_when: mas_account_result.rc > 1
+      changed_when: false
+
+    - name: Sign in to MAS when email and password are provided.
+      shell: 'mas signin "{{ apple_id_email }}" "{{ apple_id_password }}"'
+      register: mas_signin_result
+      when: mas_account_result.rc == 1 and apple_id_email != '' and apple_id_password != ''
+      ignore_errors: yes
+
+    - name: List installed MAS apps.
+      command: mas list
+      register: mas_list
+      check_mode: no
+      changed_when: false
+
+  tags: mas
+  when: ansible_os_family == 'Darwin'
