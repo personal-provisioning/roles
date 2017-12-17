@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install github-desktop
+      homebrew_cask: name=github-desktop state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: github-desktop

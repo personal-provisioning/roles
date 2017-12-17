@@ -1,0 +1,6 @@
+---
+- block:
+    - name: Install 1password
+      homebrew_cask: name=1password state=present
+      when: ansible_os_family == 'Darwin'
+  tags: 1password
