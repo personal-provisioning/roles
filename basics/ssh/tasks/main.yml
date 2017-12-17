@@ -1,0 +1,39 @@
+---
+- block:
+
+    - name: Create ssh dir
+      file:
+        path: ~/.ssh
+        state: directory
+        mode: 0700
+
+    - name: check if ssh key exists
+      stat:
+        path: ~/.ssh/base
+      register: ssh_key_file
+
+    - block:
+
+        - name: Create base ssh key
+          shell: "ssh-keygen -t ed25519 -N '{{ ssh_key_passphrase }}' -f ~/.ssh/base"
+
+        - name: Set permissions
+          file:
+            path: ~/.ssh/base
+            mode: 0600
+
+        - name: Set permissions
+          file:
+            path: ~/.ssh/base.pub
+            mode: 0600
+
+      when: ssh_key_file.stat.exists == False
+
+  tags: ssh
+  when: not(
+          (ssh_key_passphrase is undefined)
+          or
+          (ssh_key_passphrase is none)
+          or
+          (ssh_key_passphrase | trim == '')
+        )

@@ -1,0 +1,7 @@
+---
+- block:
+
+    - name: Install Git
+      homebrew: name=git state=latest
+
+  tags: git
