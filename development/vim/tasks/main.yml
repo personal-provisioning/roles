@@ -2,7 +2,19 @@
 - block:
 
     - name: Install vim
-      homebrew_cask: name=vim state=present
+      homebrew: name=vim state=present
       when: ansible_os_family == 'Darwin'
 
+    - name: Set vim config
+      template:
+        src: vimrc.tpl
+        dest: ~/.vimrc
+        backup: yes
+      when: not(
+          (vimconfig is undefined)
+          or
+          (vimconfig is none)
+          or
+          (vimconfig | trim == '')
+        )
   tags: vim
