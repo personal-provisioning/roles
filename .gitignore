@@ -27,3 +27,8 @@ Temporary Items
 
 ### Ansible ###
 *.retry
+
+### Node ###
+
+
+node_modules/
