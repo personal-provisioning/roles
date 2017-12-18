@@ -5,6 +5,9 @@
       homebrew: name=vim state=present
       when: ansible_os_family == 'Darwin'
 
+    - name: Install vim-plug
+      shell: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
     - name: Set vim config
       template:
         src: vimrc.tpl
@@ -17,4 +20,8 @@
           or
           (vimconfig | trim == '')
         )
+    
+    - name: Install vim-plug plugins
+      shell: vim +PlugInstall +qall
+
   tags: vim
