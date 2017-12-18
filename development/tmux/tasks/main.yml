@@ -1,0 +1,26 @@
+---
+- block:
+
+    - name: Install tmux
+      homebrew: name=tmux state=present
+      when: ansible_os_family == 'Darwin'
+      
+    - name: Install tmux (Arch)
+      pacman: name=tmux state=present
+      when: ansible_os_family == 'Archlinux'
+
+  
+    - name: Set tmux config
+      template:
+        src: tmux.tpl
+        dest: ~/.tmux.conf
+        backup: yes
+      when: not(
+          (tmuxconfig is undefined)
+          or
+          (tmuxconfig is none)
+          or
+          (tmuxconfig | trim == '')
+        )
+
+  tags: tmux
