@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install watch
+      homebrew: name=watch state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: watch
