@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install sublime-text
+      homebrew_cask: name=sublime-text state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: sublime-text
