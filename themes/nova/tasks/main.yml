@@ -1,10 +1,29 @@
 ---
 - block:
+    - name: "check if fish shell is used"
+      stat:
+        path: /usr/local/bin/fish
+      register: fish
+    - block:
+        - name: make sure config directory exists
+          file:
+            path: ~/.config
+            state: directory
 
-    - name: Set color fixes in shell
-      copy:
-        src: nova.fish
-        dest: ~/.config/fish/conf.d/nova.fish
+        - name: make sure fish config directory exists
+          file:
+            path: ~/.config/fish
+            state: directory
 
+        - name: make sure conf.d directory exists
+          file:
+            path: ~/.config/fish/conf.d
+            state: directory
+
+        - name: Set color fixes in fish shell
+          copy:
+            src: nova.fish
+            dest: ~/.config/fish/conf.d/nova.fish
+
+      when: fish.stat.executable
   tags: theme-nova
-  when: "'{{ shell }}' == 'fish'"
