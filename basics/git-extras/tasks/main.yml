@@ -1,0 +1,8 @@
+---
+- block:
+
+    - name: Install git-extras
+      homebrew: name=git-extras state=present
+      when: ansible_os_family == 'Darwin'
+
+  tags: git-extras
