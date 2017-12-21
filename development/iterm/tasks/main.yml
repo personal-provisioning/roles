@@ -3,6 +3,19 @@
 
     - name: Install Iterm2
       homebrew_cask: name=iterm2 state=present
-      when: ansible_os_family == 'Darwin'
+
+    - name: Set config file
+      template:
+        src: itermconfig.tpl
+        dest: ~/.config/iterm2
+        backup: yes
+      when: not(
+          (itermconfig is undefined)
+          or
+          (itermconfig is none)
+          or
+          (itermconfig | trim == '')
+        )
 
   tags: iterm
+  when: ansible_os_family == 'Darwin'
