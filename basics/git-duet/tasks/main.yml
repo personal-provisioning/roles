@@ -1,0 +1,24 @@
+---
+- block:
+    - name: Add git-duet tap
+      homebrew_tap:
+        name: git-duet/tap
+        state: present
+
+    - name: Install git-duet
+      homebrew: name=git-duet state=present
+    
+    - name: Check if authors file is present
+      stat:
+        path: ~/.git-authors
+      register: authors
+
+    - name: Create template ~/.git-authors file
+      template:
+        src: git-authors.tpl
+        dest: ~/.git-authors
+      when: not authors.stat.exists
+
+
+  tags: git-duet
+  when: ansible_os_family == 'Darwin'
